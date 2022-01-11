@@ -32,6 +32,22 @@ h1 {
 	justify-content: space-between;
 	border: 2px dotted red;
 	padding: 1.5rem;
+	padding-right: 0px;
+}
+
+.weather-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	font-size: 2rem;
+}
+
+.weather-city {
+	width: 100%;
+	text-align: center;
+	margin-top: -15px;
 }
 
 .quote-section {

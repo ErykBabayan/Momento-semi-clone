@@ -1,7 +1,7 @@
 const photoAuthor = document.getElementById("photo-author");
 const quote = document.getElementById("quote");
 const qouteAuthor = document.getElementById("quote-author");
-
+const weather = document.getElementById("weather-container");
 //api handling loading images
 
 fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
@@ -45,3 +45,24 @@ fetch("https://type.fit/api/quotes/")
 	.catch((err) => {
 		quote.textContent = "Just keep programing";
 	});
+
+navigator.geolocation.getCurrentPosition((position) => {
+	fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
+		.then((response) => {
+			if (!response.ok) {
+				throw Error("Can't provide weather data");
+			}
+			return response.json();
+		})
+		.then((data) => {
+			console.log(data);
+
+			const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+			document.getElementById("weather-container").innerHTML = `
+                <img src=${iconUrl} />
+                <p class="weather-temp">${Math.round(data.main.temp)}º </p>
+                <p class="weather-city">${data.name}</p>`;
+		});
+});
+
+//http://openweathermap.org/img/wn/04n@2x.png
