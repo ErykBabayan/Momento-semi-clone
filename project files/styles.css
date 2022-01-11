@@ -2,6 +2,9 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	font-family: "Roboto", "acumin-pro", sans-serif;
+	font-style: normal;
+	font-weight: 400;
 }
 
 body {
@@ -21,7 +24,7 @@ main {
 	height: 100vh;
 }
 h1 {
-	font-size: 3rem;
+	font-size: 5rem;
 }
 
 .info-section {
@@ -38,6 +41,17 @@ h1 {
 	justify-content: center;
 	align-items: center;
 	border: 2px dotted red;
+}
+.quote {
+	max-width: 80%;
+	padding: 0.5rem 1rem 0 1rem;
+	font-size: 1.5rem;
+	text-align: center;
+}
+
+.quote-author {
+	color: rgb(221, 221, 221);
+	font-size: 1.2rem;
 }
 
 .credits-section {
