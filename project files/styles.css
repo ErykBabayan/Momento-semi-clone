@@ -34,6 +34,13 @@ h1 {
 	padding: 1.5rem;
 	padding-right: 0px;
 }
+hr {
+	height: 2px;
+	border: none;
+	margin: 0.5rem 0.5rem 3rem 0.5rem;
+	background-color: white;
+	width: 20%;
+}
 
 .weather-container {
 	display: flex;

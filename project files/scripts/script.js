@@ -64,5 +64,3 @@ navigator.geolocation.getCurrentPosition((position) => {
                 <p class="weather-city">${data.name}</p>`;
 		});
 });
-
-//http://openweathermap.org/img/wn/04n@2x.png
