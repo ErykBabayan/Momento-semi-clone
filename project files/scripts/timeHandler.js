@@ -5,10 +5,16 @@ const interval = 1000;
 let hours;
 let minutes;
 
+function capitalize(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 setInterval(() => {
 	const date = new Date();
+	//console.log(date);
+	const dayName = date.toLocaleString("default", { weekday: "long" }); // getting name day representation of current day
+	const monthName = date.toLocaleString("default", { month: "long" });
 
-	const dayName = date.toLocaleString("default", { weekday: "short" }); // getting name day representation of current day
 	let currentDay = date.getDate();
 	let currentMonth = date.getMonth() + 1;
 
@@ -18,8 +24,8 @@ setInterval(() => {
 	if (date.getMonth() < 10) {
 		currentMonth = "0" + (date.getMonth() + 1);
 	}
-
-	dateDisplay.textContent = `${dayName.toLocaleUpperCase()} ${currentDay}.${currentMonth}.${date.getFullYear()} `;
+	//dateDisplay.textContent = `${dayName.toLocaleUpperCase()} ${currentDay}.${currentMonth}.${date.getFullYear()} `;
+	dateDisplay.textContent = `${capitalize(dayName)}, ${currentDay} ${capitalize(monthName)}`;
 
 	hours = "0" + date.getHours();
 	minutes = "0" + date.getMinutes();

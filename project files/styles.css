@@ -24,7 +24,10 @@ main {
 	height: 100vh;
 }
 h1 {
-	font-size: 5rem;
+	font-size: 8rem;
+}
+h2 {
+	font-size: 2rem;
 }
 
 .info-section {
@@ -80,4 +83,6 @@ hr {
 .credits-section {
 	border: 2px dotted red;
 	padding: 1.5rem;
+	display: flex;
+	justify-content: space-between;
 }
