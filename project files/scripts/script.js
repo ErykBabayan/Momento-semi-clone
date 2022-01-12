@@ -1,6 +1,6 @@
 const photoAuthor = document.getElementById("photo-author");
 const quote = document.getElementById("quote");
-const qouteAuthor = document.getElementById("quote-author");
+const quoteAuthor = document.getElementById("quote-author");
 const weather = document.getElementById("weather-container");
 //api handling loading images
 
@@ -18,7 +18,7 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 			document.body.style.backgroundImage = `url(${data.urls.regular})`;
 			photoAuthor.textContent = `By: ${data.user.name}`;
 		} else {
-			document.body.style.backgroundImage = `url(${data.urls.regular})`;
+			document.body.style.backgroundImage = `url(${data.urls.full})`;
 			photoAuthor.textContent = `By: ${data.user.name}`;
 		}
 	})
@@ -38,13 +38,17 @@ fetch("https://type.fit/api/quotes/")
 	})
 	.then((data) => {
 		const random = Math.floor(Math.random() * data.length); // get random quote as api doesn't provide it
-		//console.log(data);
+		console.log(data[random]);
 		quote.textContent = `${data[random].text}`;
-		qouteAuthor.textContent = `-${data[random].author}`;
+		if (data[random].author) {
+			quoteAuthor.textContent = `${data[random].author}`;
+		}
 	})
 	.catch((err) => {
 		quote.textContent = "Just keep programing";
 	});
+
+// api handling weather
 
 navigator.geolocation.getCurrentPosition((position) => {
 	fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
