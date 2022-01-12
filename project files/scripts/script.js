@@ -66,5 +66,9 @@ navigator.geolocation.getCurrentPosition((position) => {
                 <img src=${iconUrl} />
                 <p class="weather-temp">${Math.round(data.main.temp)}º </p>
                 <p class="weather-city">${data.name}</p>`;
+		})
+		.catch((error) => {
+			document.getElementById("weather-container").innerHTML = `
+                <p class="weather-city">Something went wrong</p>`;
 		});
 });
