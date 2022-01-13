@@ -33,6 +33,7 @@ h2 {
 .info-section {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	border: 2px dotted red;
 	padding: 1.5rem;
 	padding-right: 0px;
@@ -43,6 +44,27 @@ hr {
 	margin: 0.5rem 0.5rem 3rem 0.5rem;
 	background-color: white;
 	width: 20%;
+}
+
+.finances {
+	font-size: 2rem;
+}
+.finances-dashboard {
+	width: 360px;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 15px;
+	padding: 1rem;
+	position: fixed;
+	top: 120px;
+}
+
+.finance-container {
+	display: flex;
+	align-items: center;
+	padding: 5%;
+}
+.fin-price {
+	padding: 0 5%;
 }
 
 .weather-container {
