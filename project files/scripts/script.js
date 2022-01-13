@@ -2,6 +2,7 @@ const photoAuthor = document.getElementById("photo-author");
 const quote = document.getElementById("quote");
 const quoteAuthor = document.getElementById("quote-author");
 const weather = document.getElementById("weather-container");
+const finances = document.getElementById("finances");
 //api handling loading images
 
 fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
@@ -60,8 +61,8 @@ navigator.geolocation.getCurrentPosition((position) => {
 		})
 		.then((data) => {
 			console.log(data);
-
 			const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
 			document.getElementById("weather-container").innerHTML = `
                 <img src=${iconUrl} />
                 <p class="weather-temp">${Math.round(data.main.temp)}º </p>
@@ -72,3 +73,66 @@ navigator.geolocation.getCurrentPosition((position) => {
                 <p class="weather-city">Something went wrong</p>`;
 		});
 });
+
+const minuteInterval = 60000;
+getFinancialData();
+setInterval(getFinancialData, minuteInterval);
+
+//api handling financial section
+function getFinancialData() {
+	const goldData = fetch("https://api.coingecko.com/api/v3/coins/tether-gold");
+	//const usdData = fetch("https://api.coingecko.com/api/v3/coins/tether");
+	const btcData = fetch("https://api.coingecko.com/api/v3/coins/bitcoin");
+
+	Promise.all([goldData, btcData])
+		.then((values) => Promise.all(values.map((value) => value.json()))) // .map puszcza value => value.json() na kazdy element tablicy
+		.then((finalVals) => {
+			let goldData = finalVals[0];
+			let btcData = finalVals[1];
+			console.log(btcData);
+
+			const goldPrice = goldData.market_data.current_price.usd;
+			const gold24hChange = goldData.market_data.price_change_24h;
+			const btcPrice = btcData.market_data.current_price.usd;
+			const btc24hChange = btcData.market_data.price_change_24h;
+
+			finances.innerHTML = `
+				Your personal finances ▼
+		
+				<div class="finances-dashboard">
+					<div class="finance-container">
+						<img src="${goldData.image.small}" alt="asset thumbnail" class="fin-img"/>
+						<div class="fin-price">$${troyOunceToGram(goldPrice)}</div>
+						<div class="fin-daily-change" >${dailyPriceChange(goldPrice, gold24hChange)} %</div>
+					</div>
+					<div class="finance-container">
+						<img src="${btcData.image.small}" alt="asset thumbnail" class="fin-img"/>
+						<div class="fin-price">$${btcPrice}</div>
+						<div class="fin-daily-change" >${dailyPriceChange(btcPrice, btc24hChange)} %</div>
+					</div>
+				</div>
+				`;
+
+			const price24hChange = document.getElementsByClassName("fin-daily-change");
+			for (item in price24hChange) {
+				if (price24hChange.item(item).value >= 0) {
+					price24hChange.item(item).style.color = "green";
+				} else {
+					price24hChange.item(item).style.color = "red";
+				}
+			}
+		});
+}
+
+function troyOunceToGram(price) {
+	const troyOunce = 31.1034768;
+
+	const priceInGrams = (price / troyOunce).toFixed(2);
+
+	return priceInGrams;
+}
+
+function dailyPriceChange(currentPrice, priceChange24h) {
+	procentage = ((priceChange24h / currentPrice) * 100).toFixed(2);
+	return procentage;
+}
