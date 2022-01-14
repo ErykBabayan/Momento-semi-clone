@@ -79,13 +79,16 @@ getFinancialData();
 setInterval(getFinancialData, minuteInterval);
 
 let toggleDashboard = false;
+let isOpened;
 const financesDashoboard = document.getElementById("finances-head");
 financesDashoboard.addEventListener("click", function () {
-	if (toggleDashboard == true) {
+	if (toggleDashboard) {
 		document.getElementById("finances-dashboard").style.display = "none";
 		toggleDashboard = false;
+		isOpened = false;
 	} else {
 		document.getElementById("finances-dashboard").style.display = "initial";
+		isOpened = true;
 		toggleDashboard = true;
 	}
 });
@@ -101,6 +104,7 @@ function getFinancialData() {
 		.then((finalVals) => {
 			let goldData = finalVals[0];
 			let btcData = finalVals[1];
+
 			console.log(goldData);
 
 			const goldPrice = goldData.market_data.current_price.pln;
@@ -122,6 +126,10 @@ function getFinancialData() {
 					</div>
 				</div>
 				`;
+
+			if (isOpened) {
+				document.getElementById("finances-dashboard").style.display = "initial";
+			}
 
 			const price24hChange = document.getElementsByClassName("fin-daily-change");
 			for (item in price24hChange) {
