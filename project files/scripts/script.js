@@ -78,6 +78,17 @@ const minuteInterval = 60000;
 getFinancialData();
 setInterval(getFinancialData, minuteInterval);
 
+let toggleDashboard = false;
+finances.addEventListener("click", function () {
+	if (toggleDashboard == true) {
+		document.getElementById("finances-dashboard").style.display = "none";
+		toggleDashboard = false;
+	} else {
+		document.getElementById("finances-dashboard").style.display = "initial";
+		toggleDashboard = true;
+	}
+});
+
 //api handling financial section
 function getFinancialData() {
 	const goldData = fetch("https://api.coingecko.com/api/v3/coins/tether-gold");
@@ -97,9 +108,9 @@ function getFinancialData() {
 			const btc24hChange = btcData.market_data.price_change_24h;
 
 			finances.innerHTML = `
-				Your personal finances ▼
+				<div>Your personal finances ▼<div>
 		
-				<div class="finances-dashboard">
+				<div class="finances-dashboard" id="finances-dashboard">
 					<div class="finance-container">
 						<img src="${goldData.image.small}" alt="asset thumbnail" class="fin-img"/>
 						<div class="fin-price">$${troyOunceToGram(goldPrice)}</div>
@@ -126,9 +137,7 @@ function getFinancialData() {
 
 function troyOunceToGram(price) {
 	const troyOunce = 31.1034768;
-
 	const priceInGrams = (price / troyOunce).toFixed(2);
-
 	return priceInGrams;
 }
 
