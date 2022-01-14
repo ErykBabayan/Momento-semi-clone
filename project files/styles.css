@@ -29,24 +29,32 @@ h1 {
 h2 {
 	font-size: 2rem;
 }
-
-.info-section {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border: 2px dotted red;
-	padding: 1.5rem;
-	padding-right: 0px;
-}
 hr {
 	height: 2px;
 	border: none;
 	margin: 0.5rem 0.5rem 3rem 0.5rem;
 	background-color: white;
 	width: 20%;
+	max-width: 380px;
+}
+a:active,
+a:link,
+a:visited {
+	color: white;
+}
+
+.info-section {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1.5rem;
+	padding-right: 0px;
 }
 
 .finances {
+	font-size: 2rem;
+}
+.finances-head {
 	font-size: 2rem;
 	cursor: pointer;
 }
@@ -57,6 +65,7 @@ hr {
 	border-radius: 15px;
 	position: fixed;
 	top: 120px;
+	left: 15px;
 }
 
 .finance-container {
@@ -66,6 +75,17 @@ hr {
 }
 .fin-price {
 	padding: 0 5%;
+}
+@media screen and (max-width: 660px) {
+	.finances-head {
+		font-size: 1.5rem;
+	}
+	.finances {
+		font-size: 1.5rem;
+	}
+	.finances-dashboard {
+		width: 280px;
+	}
 }
 
 .weather-container {
@@ -89,7 +109,6 @@ hr {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border: 2px dotted red;
 }
 .quote {
 	max-width: 80%;
@@ -104,13 +123,7 @@ hr {
 }
 
 .credits-section {
-	border: 2px dotted red;
 	padding: 1.5rem;
 	display: flex;
 	justify-content: space-between;
-}
-a:active,
-a:link,
-a:visited {
-	color: white;
 }
